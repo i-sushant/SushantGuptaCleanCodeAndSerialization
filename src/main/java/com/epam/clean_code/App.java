@@ -23,6 +23,7 @@ public class App
     private static void getHouseDetails(Scanner scanner) {
     	try {
     		String materialType;
+    		boolean fullyAutomated = false;
         	System.out.println("Total Area for the house");
         	float totalArea = scanner.nextFloat();
         	System.out.println("Select material type : \n\t1.standard\n\t2.above standard\n\t3.high standard\n\t4.high standard and fully automated)");
@@ -31,21 +32,30 @@ public class App
         		materialType = "standard";
         	else if(materialChoice == 2)
         		materialType = "aboveStandard";
-        	else if(materialChoice == 3) 
+        	else if(materialChoice == 3) {
         		materialType = "highStandard";
+        		System.out.println("Do you want a fully automated house (y/n)");
+        		char automationChoice = scanner.next().charAt(0);
+        		if(automationChoice == 'Y' || automationChoice == 'y') {
+        			fullyAutomated = true;
+        		}
+        	}
+        		
         	else if(materialChoice == 4) { 
         		materialType = "highStandardFullyAutomated";
         	}
         	else
         		return;
-        	calculateHouseConstructionCost( totalArea,  materialType);
+        	calculateHouseConstructionCost( totalArea,  materialType, fullyAutomated);
     	} catch(Exception exception) {
     		exception.printStackTrace();
+    	} finally {
+    		scanner.close();
     	}
     	
 	}
-	private static void calculateHouseConstructionCost(float totalArea, String materialType) {
-    	House house = new House(totalArea, materialType);
+	private static void calculateHouseConstructionCost(float totalArea, String materialType, boolean fullyAutomated) {
+    	House house = new House(totalArea, materialType, fullyAutomated);
     	System.out.println("Total Price of the house would be " + house.getHousePrice());
 	}
     
@@ -71,7 +81,9 @@ public class App
 			calculateInterest(principalAmount, interestRate, totalTime, compoundingTime);
 		} catch(Exception exception) {
 			exception.printStackTrace();
-		}	
+		}	finally {
+			scanner.close();
+		}
 	}
 	private static void calculateInterest(float principal,float interestRate,int totalTime,int compoundingTime) {
     	Interest interest;
