@@ -18,14 +18,16 @@ public class Interest {
 		this.compoundingTimeInYears = compoundingTimeInYears;
 	}
 	public float calculateSimpleInterest() {
-		float amount, simpleInterest;
+		float amount;
+		float simpleInterest;
 		amount = this.principal * (1 + ((this.interestRate/100) * this.totalTime));
 		simpleInterest = amount - this.principal;
 		return simpleInterest;
 	}
 	
 	public float calculateCompoundInterest() {
-		float amount, compoundInterest;
+		float amount; 
+		float compoundInterest;
 		amount =  (float) (this.principal * Math.pow(1 + ((this.interestRate/100)/this.compoundingTimeInYears), (this.compoundingTimeInYears * totalTime)));
 		compoundInterest = amount - this.principal; 
 		return compoundInterest;
