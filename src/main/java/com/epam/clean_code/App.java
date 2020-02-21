@@ -40,10 +40,6 @@ public class App
         			fullyAutomated = true;
         		}
         	}
-        		
-        	else if(materialChoice == 4) { 
-        		materialType = "highStandardFullyAutomated";
-        	}
         	else
         		return;
         	calculateHouseConstructionCost( totalArea,  materialType, fullyAutomated);
